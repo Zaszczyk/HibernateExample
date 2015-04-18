@@ -2,7 +2,8 @@ package com.politechnika.hibernatealone.application;
 
 import com.politechnika.hibernatealone.entity.Company;
 import com.politechnika.hibernatealone.entity.Employee;
-import com.politechnika.hibernatealone.entity.Position;
+import com.politechnika.hibernatealone.entity.Student;
+import com.politechnika.hibernatealone.entity.Klasa;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -22,27 +23,29 @@ public class HibernateAlone {
 
         manager.getTransaction().begin();
 
-        Position position = new Position();
-        position.setPositionName("Manager");
+        Klasa klasa = new Klasa();
+        klasa.setName("1b");
+        klasa.setYear("2014/2015");
 
-        manager.persist(position);
- 
-        Company company = new Company();
-        company.setCompanyName("Fulda");
-        
-        manager.persist(company);
-                
-        Employee employee = new Employee();
-        employee.setPosition(position);
-        employee.setFullName("Zenek Zenkowski");
-        employee.setStreet("Paderewskiego");
-        employee.setStreetNumber("26/64");
-        employee.setCompany(company);
+        manager.persist(klasa);
 
-        manager.persist(employee);
+        Student student = new Student();
+        student.setName("Mateusz");
+        student.setCity("Opole");
+        student.setPesel("12345678901");
+        student.setSex("M");
+        student.setSurname("Blaszczyk");
+        student.setStreet("Ozimska 3e");
+        student.setZipcode("34-123");
+        student.setKlasa(klasa);
+
+        System.out.println(student.toString());
+
+        manager.persist(student);
+
         manager.getTransaction().commit();
 
-        CriteriaBuilder criteriaBuilder = manager.getCriteriaBuilder();
+     /*   CriteriaBuilder criteriaBuilder = manager.getCriteriaBuilder();
         CriteriaQuery<Employee> query = criteriaBuilder.createQuery(Employee.class);
         Root<Employee> from = query.from(Employee.class);
         CriteriaQuery<Employee> select = query.select(from);
@@ -52,7 +55,7 @@ public class HibernateAlone {
             System.out.println(emp.toString());
 //            manager.remove(emp);
         }
-//        manager.getTransaction().commit();
+//        manager.getTransaction().commit();*/
         
         manager.close();
         factory.close();

@@ -3,7 +3,7 @@ package com.politechnika.hibernatealone.entity;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "students")
+@Table(name = "student")
 public class Student {
 
     @Id
@@ -11,8 +11,11 @@ public class Student {
     @Column(name = "student_id")
     private Integer studentId;
 
-    @Column(name = "class_id")
-    private Long classId;
+
+    @ManyToOne
+    @JoinColumn(name = "class_id")
+    Klasa klasa;
+
 
     @Column(length = 60)
     private String name;
@@ -35,12 +38,21 @@ public class Student {
     @Column(length = 11)
     private String pesel;
 
-    public Long getClassId() {
-        return classId;
+
+    public Integer getStudentId() {
+        return studentId;
     }
 
-    public void setClassId(Long classId) {
-        this.classId = classId;
+    public void setStudentId(Integer studentId) {
+        this.studentId = studentId;
+    }
+
+    public Klasa getKlasa() {
+        return klasa;
+    }
+
+    public void setKlasa(Klasa klasa) {
+        this.klasa = klasa;
     }
 
     public String getName() {
@@ -99,15 +111,11 @@ public class Student {
         this.pesel = pesel;
     }
 
-    @ManyToOne
-    @JoinColumn(name = "class_id")
-    Klasa class_id;
-
     @Override
     public String toString() {
         return "Student{" +
                 "studentId=" + studentId +
-                ", classId=" + classId +
+                ", klasa=" + klasa +
                 ", name='" + name + '\'' +
                 ", surname='" + surname + '\'' +
                 ", street='" + street + '\'' +
@@ -117,6 +125,4 @@ public class Student {
                 ", pesel='" + pesel + '\'' +
                 '}';
     }
-
-
 }
