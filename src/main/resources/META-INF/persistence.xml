@@ -20,7 +20,7 @@
 
             <property name="hibernate.default_schema" value="crm"/>
 
-            <property name="hibernate.hbm2ddl.auto" value="create"/>
+            <property name="hibernate.hbm2ddl.auto" value="update"/>
 
             <property name="show_sql" value="true"/>
         </properties>
