@@ -20,7 +20,7 @@ public class HibernateAlone {
         StudentRepository studentRepository = new StudentRepository(manager);
 
         Student student = new Student();
-/*        student.setName("Daniel");
+        student.setName("Daniel");
         student.setCity("Opole");
         student.setPesel("12345678901");
         student.setSex("M");
@@ -29,7 +29,7 @@ public class HibernateAlone {
         student.setZipcode("34-123");
 
 
-        studentRepository.create(student);*/
+        studentRepository.create(student);
 
         List<Student> students = studentRepository.getAll();
 
@@ -158,8 +158,58 @@ public class HibernateAlone {
         EntityManagerFactory factory = Persistence.createEntityManagerFactory("hibernateAlone");
         manager = factory.createEntityManager();
 
-        //handleTeacher();
-        handleMark();
+        KlasaRepository klasaRepository = new KlasaRepository(manager);
+        Klasa klasa = new Klasa();
+        klasa.setName("1a");
+        klasa.setYear("2014/2015");
+        klasaRepository.create(klasa);
+
+
+        SubjectRepository subjectRepository = new SubjectRepository(manager);
+
+        Subject subject = new Subject();
+        subject.setName("Matematyka");
+        subjectRepository.create(subject);
+
+
+        StudentRepository studentRepository = new StudentRepository(manager);
+
+        Student student = new Student();
+        student.setName("MAteusz");
+        student.setCity("Opole");
+        student.setPesel("12345678901");
+        student.setSex("M");
+        student.setSurname("Blaszczyk");
+        student.setStreet("Ozimska 3e");
+        student.setZipcode("34-123");
+        student.setKlasa(klasa);
+        studentRepository.create(student);
+
+
+        TeacherRepository teacherRepository = new TeacherRepository(manager);
+
+        Teacher teacher = new Teacher();
+        teacher.setName("Jan");
+        teacher.setCity("Opole");
+        teacher.setSex("M");
+        teacher.setSurname("Kowalski");
+        teacher.setStreet("Ozimska 3e");
+        teacher.setZipcode("34-123");
+        teacherRepository.create(teacher);
+
+
+        MarkRepository markRepository = new MarkRepository(manager);
+
+        Mark mark = new Mark();
+        mark.setDate(new Date());
+        mark.setDescription("Kartkówka");
+        mark.setMark(3);
+        mark.setStudent(student);
+        mark.setTeacher(teacher);
+        mark.setSubject(subject);
+
+        markRepository.create(mark);
+
 
         manager.close();
         factory.close();

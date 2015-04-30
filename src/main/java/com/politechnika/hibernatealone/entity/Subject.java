@@ -12,7 +12,7 @@ public class Subject {
     @Column(name = "subject_id")
     private Integer subjectId;
 
-    @Column(unique = true, length = 2)
+    @Column(unique = true, length = 20)
     private String name;
 
     public Integer getSubjectId() {
